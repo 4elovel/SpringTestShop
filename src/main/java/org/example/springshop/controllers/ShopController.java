@@ -54,7 +54,7 @@ public class ShopController {
         Optional<Shop> shop = shopService.getShopById(id);
         if (shop.isPresent()) {
             model.addAttribute("shop", shop);
-            return "add_shop.html";
+            return "edit_shop.html";
         }
         return "redirect:/";
     }
