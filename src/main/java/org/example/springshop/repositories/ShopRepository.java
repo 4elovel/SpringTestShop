@@ -41,10 +41,6 @@ public class ShopRepository {
         return shop;
     }
 
-    public void delete(Shop shop) {
-        shops.remove(shop);
-    }
-
     public void delete(Long id) {
         shops.removeIf(store -> store.getId().equals(id));
     }

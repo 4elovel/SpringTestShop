@@ -3,39 +3,40 @@ package org.example.springshop.services;
 import java.util.List;
 import java.util.Optional;
 import org.example.springshop.models.Shop;
-import org.example.springshop.repositories.ShopRepository;
+import org.example.springshop.repositories.ShopSpringDataRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ShopService {
 
-    private final ShopRepository shopRepository;
+    private final ShopSpringDataRepository shopSpringDataRepository;
 
-    public ShopService(ShopRepository shopRepository) {
-        this.shopRepository = shopRepository;
+    public ShopService(ShopSpringDataRepository shopSpringDataRepository) {
+        this.shopSpringDataRepository = shopSpringDataRepository;
     }
 
     public List<Shop> getAllShops() {
-        return shopRepository.findAll();
+        return (List<Shop>) shopSpringDataRepository.findAll();
     }
 
     public Optional<Shop> getShopById(Long id) {
-        return shopRepository.findById(id);
+        return shopSpringDataRepository.findById(id);
     }
 
     public Shop addShop(Shop shop) {
-        return shopRepository.save(shop);
+        return shopSpringDataRepository.save(shop);
     }
 
     public void updateShop(Shop shop) {
-        shopRepository.update(shop);
+        shopSpringDataRepository.save(shop);
     }
 
     public void deleteShop(Long id) {
-        shopRepository.delete(id);
+        shopSpringDataRepository.deleteById(id);
     }
 
     public List<Shop> searchShops(String query) {
-        return shopRepository.search(query);
+        return shopSpringDataRepository.findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(
+                query, query);
     }
 }
